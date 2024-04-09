@@ -1,10 +1,17 @@
+import 'package:chit_chat/features/landing/screens/landing_screen.dart';
+import 'package:chit_chat/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'package:chit_chat/screens/mobile_layout_screen.dart';
 import 'package:chit_chat/screens/web_layout_screen.dart';
 import 'package:chit_chat/utils/responsive_layout.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,10 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: backgroundColor,
       ),
-      home: const ResponsiveLayout(
-        mobileScreenLayout: MobileLayoutScreen(),
-        webScreenLayout: WebLayoutScreen(),
-      ),
+      home: const LandingScreen(),
     );
   }
 }
