@@ -3,7 +3,7 @@ import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/widgets/contacts_list.dart';
 
 class MobileLayoutScreen extends StatelessWidget {
-  const MobileLayoutScreen({Key? key}) : super(key: key);
+  const MobileLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
