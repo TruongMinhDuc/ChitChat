@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 0,
         backgroundColor: backgroundColor,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 90,
               child: CustomButton(
                 onPressed: () {},
-                text: 'NEXT',
+                text: 'Next',
               ),
             ),
           ],
