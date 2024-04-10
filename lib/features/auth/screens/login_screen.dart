@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login-screen';
+
   const LoginScreen({super.key});
 
   @override
@@ -23,12 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void pickCountry() {
     showCountryPicker(
-      context: context,
-      onSelect: (Country _country) {
-        setState(() {
-          country = _country;
+        context: context,
+        onSelect: (Country _country) {
+          setState(() {
+            country = _country;
+          });
         });
-    });
   }
 
   @override
@@ -49,16 +50,22 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text("ChitChat will need to verify your phone number"),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             TextButton(
               onPressed: pickCountry,
               child: const Text('Pick Country'),
             ),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             Row(
               children: [
-                if(country != null ) Text('+${country!.phoneCode}'),
-                const SizedBox(width: 10,),
+                if (country != null) Text('+${country!.phoneCode}'),
+                const SizedBox(
+                  width: 10,
+                ),
                 SizedBox(
                   width: size.width * 0.7,
                   child: TextField(
@@ -70,7 +77,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            SizedBox(height: size.height * 0.6,),
+            SizedBox(
+              height: size.height * 0.6,
+            ),
             SizedBox(
               width: 90,
               child: CustomButton(
