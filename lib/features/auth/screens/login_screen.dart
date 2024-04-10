@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: size.width * 0.7,
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     controller: phoneController,
                     decoration: const InputDecoration(
                       hintText: 'phone number',

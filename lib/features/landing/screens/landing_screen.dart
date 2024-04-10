@@ -16,46 +16,49 @@ class LandingScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: size.height / 50),
-            Image.asset(
-              'assets/bg.png',
-              height: 340,
-              width: 340,
-              color: tabColor,
-            ),
-
-            SizedBox(height: size.height / 20),
-            const Text(
-              "Welcome to ChitChat",
-              style: TextStyle(
-                fontSize: 33,
-                fontWeight: FontWeight.w600,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: size.height / 50),
+              Image.asset(
+                'assets/bg.png',
+                height: 340,
+                width: 340,
+                color: tabColor,
               ),
-            ),
-            //SizedBox(height: size.height / 9),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                'Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.',
+
+              SizedBox(height: size.height / 20),
+              const Text(
+                "Welcome to ChitChat",
                 style: TextStyle(
-                  color: greyColor,
+                  fontSize: 33,
+                  fontWeight: FontWeight.w600,
                 ),
-                textAlign: TextAlign.center,
               ),
-            ),
+              //SizedBox(height: size.height / 9),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  'Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.',
+                  style: TextStyle(
+                    color: greyColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
 
-            SizedBox(height: size.height / 4),
-            SizedBox(
-              width: size.width * 01,
-              child: CustomButton(
-                text: 'Agree and continue',
-                onPressed: () => navigateToLoginScreen(context),
+              SizedBox(height: size.height / 4),
+              SizedBox(
+                width: size.width * 01,
+                child: CustomButton(
+                  text: 'Agree and continue',
+                  onPressed: () => navigateToLoginScreen(context),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
