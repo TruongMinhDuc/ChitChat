@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
-import 'package:chit_chat/info.dart';
 import 'package:chit_chat/widgets/chat_list.dart';
 import 'package:chit_chat/widgets/web_chat_appbar.dart';
 import 'package:chit_chat/widgets/contacts_list.dart';
-import 'package:chit_chat/widgets/my_message_card.dart';
-import 'package:chit_chat/widgets/sender_message_card.dart';
 import 'package:chit_chat/widgets/web_profile_bar.dart';
 import 'package:chit_chat/widgets/web_search_bar.dart';
 

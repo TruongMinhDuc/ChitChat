@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^4.19.0
   cloud_firestore: ^4.16.0
   firebase_storage: ^11.7.0
+  country_code_picker: ^3.0.0
+  country_picker: ^2.0.25
 
 dev_dependencies:
   flutter_test:

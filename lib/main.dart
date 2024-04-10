@@ -1,11 +1,9 @@
 import 'package:chit_chat/features/landing/screens/landing_screen.dart';
 import 'package:chit_chat/firebase_options.dart';
+import 'package:chit_chat/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
-import 'package:chit_chat/screens/mobile_layout_screen.dart';
-import 'package:chit_chat/screens/web_layout_screen.dart';
-import 'package:chit_chat/utils/responsive_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +23,11 @@ class MyApp extends StatelessWidget {
       title: 'Chit Chat',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: backgroundColor,
+        appBarTheme: const AppBarTheme(
+          color: appBarColor,
+        ),
       ),
+      onGenerateRoute: (settings) => generateRoute(settings),
       home: const LandingScreen(),
     );
   }
