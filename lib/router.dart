@@ -1,6 +1,5 @@
 import 'package:chit_chat/common/widgets/error.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {

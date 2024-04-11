@@ -4,7 +4,7 @@ import 'package:chit_chat/info.dart';
 import 'package:chit_chat/screens/mobile_chat_screen.dart';
 
 class ContactsList extends StatelessWidget {
-  const ContactsList({Key? key}) : super(key: key);
+  const ContactsList({super.key});
 
   @override
   Widget build(BuildContext context) {

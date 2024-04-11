@@ -4,7 +4,7 @@ import 'package:chit_chat/widgets/my_message_card.dart';
 import 'package:chit_chat/widgets/sender_message_card.dart';
 
 class ChatList extends StatelessWidget {
-  const ChatList({Key? key}) : super(key: key);
+  const ChatList({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -38,8 +38,8 @@ class LandingScreen extends StatelessWidget {
                 ),
               ),
               //SizedBox(height: size.height / 9),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
+              const Padding(
+                padding: EdgeInsets.all(15.0),
                 child: Text(
                   'Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.',
                   style: TextStyle(
