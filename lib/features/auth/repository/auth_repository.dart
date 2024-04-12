@@ -2,8 +2,16 @@ import 'package:chit_chat/common/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../screens/otp_screen.dart';
+
+final authRepositoryProvider = Provider(
+  (ref) => AuthRepository(
+    auth: FirebaseAuth.instance,
+    firestore: FirebaseFirestore.instance,
+  ),
+);
 
 class AuthRepository {
   final FirebaseAuth auth;
