@@ -43,6 +43,7 @@ dependencies:
   country_picker: ^2.0.25
   flutter_launcher_icons: ^0.13.1
   riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:
