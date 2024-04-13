@@ -1,6 +1,7 @@
 import 'package:chit_chat/common/widgets/error.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
 import 'package:chit_chat/features/auth/screens/otp_screen.dart';
+import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,6 +16,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => OTPScreen(
           verificationId: verificationId,
         ),
+      );
+    case UserInformationScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const UserInformationScreen(),
       );
     default:
       return MaterialPageRoute(

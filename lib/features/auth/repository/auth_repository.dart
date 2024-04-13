@@ -1,7 +1,9 @@
 import 'package:chit_chat/common/utils/utils.dart';
+import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../screens/otp_screen.dart';
@@ -42,6 +44,25 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
+      showSnackBar(context: context, content: e.message!);
+    }
+  }
+  void verifyOTP({
+    required BuildContext context,
+    required String verificationId,
+    required String userOTP,
+  }) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId,
+          smsCode: userOTP);
+      await auth.signInWithCredential(credential);
+      Navigator.pushNamedAndRemoveUntil(context,
+          UserInformationScreen.routeName,
+              (route) => false);
+
+    }
+    on FirebaseAuthException catch(e) {
       showSnackBar(context: context, content: e.message!);
     }
   }
