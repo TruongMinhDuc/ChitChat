@@ -45,11 +45,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (phoneNumber.isEmpty) {
         showSnackBar(
             context: context, content: 'Please enter your phone number.');
-      } else {
-        if (country != null) {
-          showSnackBar(
-              context: context, content: 'Please choose your country.');
-        }
+      }
+      if (country == null) {
+        showSnackBar(context: context, content: 'Please choose your country.');
       }
     }
   }
