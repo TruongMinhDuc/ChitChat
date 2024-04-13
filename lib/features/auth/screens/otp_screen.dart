@@ -20,7 +20,10 @@ class _OTPScreenState extends State<OTPScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verifying your phone number'),
+        automaticallyImplyLeading: false,
+        title: const Center(
+          child: Text('Verifying your phone number'),
+        ),
         elevation: 0,
         backgroundColor: backgroundColor,
       ),
@@ -36,15 +39,16 @@ class _OTPScreenState extends State<OTPScreen> {
               child: TextField(
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
+                style: TextStyle(
+                  fontSize: 40
+                ),
                 decoration: const InputDecoration(
                   hintText: '- - - - - -',
                   hintStyle: TextStyle(
-                    fontSize: 50,
+                    fontSize: 40,
                   ),
                 ),
-                onChanged: (val) {
-
-                },
+                onChanged: (val) {},
               ),
             ),
           ],
