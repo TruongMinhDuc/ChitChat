@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chit_chat/common/utils/utils.dart';
@@ -28,6 +29,18 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     setState(() {});
   }
 
+  void storeUserData() async {
+    String name = nameController.text.trim();
+
+    if (name.isNotEmpty) {
+      ref.read(authControllerProvider).saveUserDataToFireBase(
+            context,
+            name,
+            image,
+          );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,9 +54,9 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                 children: [
                   image == null
                       ? const CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/defaultAvatar.png')
-                                  as ImageProvider,
+                          backgroundImage: NetworkImage(
+                            'https://avatars.githubusercontent.com/u/44272694?v=4',
+                          ),
                           radius: 64,
                         )
                       : CircleAvatar(
@@ -77,7 +90,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: selectImage,
+                    onPressed: storeUserData,
                     icon: const Icon(
                       Icons.done,
                     ),

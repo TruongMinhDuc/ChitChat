@@ -43,7 +43,7 @@ class OTPScreen extends ConsumerWidget {
               child: TextField(
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 40
                 ),
                 decoration: const InputDecoration(

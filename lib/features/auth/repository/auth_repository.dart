@@ -1,18 +1,25 @@
+import 'dart:io';
+import 'package:chit_chat/common/repositories/common_firebase_storage_repository.dart';
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
+import 'package:chit_chat/models/user_model.dart';
+import 'package:chit_chat/screens/mobile_layout_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../screens/otp_screen.dart';
 
 final authRepositoryProvider = Provider(
-  (ref) => AuthRepository(
-    auth: FirebaseAuth.instance,
-    firestore: FirebaseFirestore.instance,
-  ),
+      (ref) =>
+      AuthRepository(
+        auth: FirebaseAuth.instance,
+        firestore: FirebaseFirestore.instance,
+      ),
 );
 
 class AuthRepository {
@@ -47,6 +54,7 @@ class AuthRepository {
       showSnackBar(context: context, content: e.message!);
     }
   }
+
   void verifyOTP({
     required BuildContext context,
     required String verificationId,
@@ -54,16 +62,46 @@ class AuthRepository {
   }) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: verificationId,
-          smsCode: userOTP);
+          verificationId: verificationId, smsCode: userOTP);
       await auth.signInWithCredential(credential);
-      Navigator.pushNamedAndRemoveUntil(context,
-          UserInformationScreen.routeName,
-              (route) => false);
-
-    }
-    on FirebaseAuthException catch(e) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, UserInformationScreen.routeName, (route) => false);
+    } on FirebaseAuthException catch (e) {
       showSnackBar(context: context, content: e.message!);
+    }
+  }
+
+  void saveUserDataToFirebase({
+    required String name,
+    required File? profilePic,
+    required ProviderRef ref,
+    required BuildContext context,
+  }) async {
+    try {
+      String uid = auth.currentUser!.uid;
+      String photoUrl = 'https://avatars.githubusercontent.com/u/44272694?v=4';
+      if (profilePic != null) {
+        photoUrl = await ref
+            .read(commonFirebaseStorageRepositoryProvider)
+            .storeFileToFirebase(
+          'profilePic/$uid',
+          profilePic,
+        );
+      }
+      var user = UserModel(
+        name: name,
+        uid: uid,
+        profilePic: photoUrl,
+        isOnline: true,
+        phoneNumber: auth.currentUser!.uid,
+        groupId: [],
+      );
+
+      await firestore.collection('users').doc(uid).set(user.toMap());
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+        builder: (context) => const MobileLayoutScreen(),), (route) => false);
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
     }
   }
 }
