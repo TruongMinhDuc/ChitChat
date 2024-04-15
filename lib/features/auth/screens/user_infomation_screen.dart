@@ -5,7 +5,8 @@ import 'package:chit_chat/common/utils/utils.dart';
 
 class UserInformationScreen extends ConsumerStatefulWidget {
   static const String routeName = '/user-information';
-  const UserInformationScreen({Key? key}) : super(key: key);
+
+  const UserInformationScreen({super.key});
 
   @override
   ConsumerState<UserInformationScreen> createState() =>
@@ -27,7 +28,6 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     setState(() {});
   }
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,17 +41,17 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                 children: [
                   image == null
                       ? const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
-                    ),
-                    radius: 64,
-                  )
+                          backgroundImage:
+                              AssetImage('assets/defaultAvatar.png')
+                                  as ImageProvider,
+                          radius: 64,
+                        )
                       : CircleAvatar(
-                    backgroundImage: FileImage(
-                      image!,
-                    ),
-                    radius: 64,
-                  ),
+                          backgroundImage: FileImage(
+                            image!,
+                          ),
+                          radius: 64,
+                        ),
                   Positioned(
                     bottom: -10,
                     left: 80,
