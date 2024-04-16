@@ -1,6 +1,10 @@
+import 'package:chit_chat/common/widgets/error.dart';
+import 'package:chit_chat/common/widgets/loader.dart';
+import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:chit_chat/features/landing/screens/landing_screen.dart';
 import 'package:chit_chat/firebase_options.dart';
 import 'package:chit_chat/router.dart';
+import 'package:chit_chat/screens/mobile_layout_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,16 +16,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
 }
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Chit Chat',
@@ -32,7 +36,20 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const LandingScreen(),
+      home: ref.watch(userDataAuthProvider).when(
+        data: (user) {
+          if (user == null) {
+            return const MobileLayoutScreen();
+          }
+          return const LandingScreen();
+        },
+        error: (err, trace) {
+          return ErrorScreen(
+            error: err.toString(),
+          );
+        },
+        loading: () => const Loader(),
+      ),
     );
   }
 }
