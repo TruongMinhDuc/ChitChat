@@ -8,10 +8,12 @@ import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+
     case LoginScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       );
+
     case OTPScreen.routeName:
       final verificationId = settings.arguments as String;
       return MaterialPageRoute(
@@ -19,18 +21,28 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           verificationId: verificationId,
         ),
       );
+
     case UserInformationScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const UserInformationScreen(),
       );
+
     case SelectContactsScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const SelectContactsScreen(),
       );
+
     case MobileChatScreen.routeName:
+      final arguments = settings.arguments as Map<String, dynamic>;
+      final name = arguments['name'];
+      final uid = arguments['uid'];
       return MaterialPageRoute(
-        builder: (context) => const MobileChatScreen(),
+        builder: (context) => MobileChatScreen(
+          name: name,
+          uid: uid,
+        ),
       );
+
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(

@@ -15,11 +15,10 @@ import 'package:riverpod/riverpod.dart';
 import '../screens/otp_screen.dart';
 
 final authRepositoryProvider = Provider(
-      (ref) =>
-      AuthRepository(
-        auth: FirebaseAuth.instance,
-        firestore: FirebaseFirestore.instance,
-      ),
+  (ref) => AuthRepository(
+    auth: FirebaseAuth.instance,
+    firestore: FirebaseFirestore.instance,
+  ),
 );
 
 class AuthRepository {
@@ -32,10 +31,11 @@ class AuthRepository {
   });
 
   Future<UserModel?> getCurrentUserData() async {
-    var userData = await firestore.collection('users').doc(auth.currentUser?.uid).get();
-  
+    var userData =
+        await firestore.collection('users').doc(auth.currentUser?.uid).get();
+
     UserModel? user;
-    if(userData.data() != null) {
+    if (userData.data() != null) {
       user = UserModel.fromMap(userData.data()!);
     }
     return user;
@@ -94,9 +94,9 @@ class AuthRepository {
         photoUrl = await ref
             .read(commonFirebaseStorageRepositoryProvider)
             .storeFileToFirebase(
-          'profilePic/$uid',
-          profilePic,
-        );
+              'profilePic/$uid',
+              profilePic,
+            );
       }
       var user = UserModel(
         name: name,
@@ -108,10 +108,22 @@ class AuthRepository {
       );
 
       await firestore.collection('users').doc(uid).set(user.toMap());
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-        builder: (context) => const MobileLayoutScreen(),), (route) => false);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MobileLayoutScreen(),
+          ),
+          (route) => false);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
+  }
+
+  Stream<UserModel> userData(String userId) {
+    return firestore.collection('users').doc(userId).snapshots().map(
+          (event) => UserModel.fromMap(
+            event.data()!,
+          ),
+        );
   }
 }
