@@ -4,6 +4,7 @@ import 'package:chit_chat/info.dart';
 import 'package:chit_chat/widgets/chat_list.dart';
 
 class MobileChatScreen extends StatelessWidget {
+  static const String routeName = '/mobile-chat-screen';
   const MobileChatScreen({super.key});
 
   @override
