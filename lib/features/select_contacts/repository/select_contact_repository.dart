@@ -1,6 +1,6 @@
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/models/user_model.dart';
-import 'package:chit_chat/screens/mobile_chat_screen.dart';
+import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';

@@ -3,7 +3,7 @@ import 'package:chit_chat/features/auth/screens/login_screen.dart';
 import 'package:chit_chat/features/auth/screens/otp_screen.dart';
 import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
-import 'package:chit_chat/screens/mobile_chat_screen.dart';
+import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
