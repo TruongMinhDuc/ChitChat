@@ -19,10 +19,10 @@ class SelectContactRepository {
     required this.firestore,
   });
 
-  Future<List<Contact>> getContacts () async {
+  Future<List<Contact>> getContacts() async {
     List<Contact> contacts = [];
     try {
-      if(await FlutterContacts.requestPermission()) {
+      if (await FlutterContacts.requestPermission()) {
         contacts = await FlutterContacts.getContacts(withProperties: true);
       }
     } catch (e) {
@@ -36,23 +36,30 @@ class SelectContactRepository {
       var userCollection = await firestore.collection('users').get();
       bool isFound = false;
 
-      for(var document in userCollection.docs) {
+      for (var document in userCollection.docs) {
         var userData = UserModel.fromMap(document.data());
         String selectedPhoneNum = selectedContact.phones[0].number.replaceAll(
           ' ',
           '',
         );
-        if(selectedPhoneNum == userData.phoneNumber) {
+        if (selectedPhoneNum == userData.phoneNumber) {
           isFound = true;
-          Navigator.pushNamed(context, MobileChatScreen.routeName);
-        }
-
-        if(!isFound) {
-          showSnackBar(
-            context: context,
-            content: 'This number does not exist on this app.',
+          Navigator.pushNamed(
+            context,
+            MobileChatScreen.routeName,
+            arguments: {
+              'name': userData.name,
+              'uid': userData.uid,
+            },
           );
         }
+      }
+
+      if (!isFound) {
+        showSnackBar(
+          context: context,
+          content: 'This number does not exist on this app.',
+        );
       }
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
