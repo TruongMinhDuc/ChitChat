@@ -19,6 +19,7 @@ class MobileChatScreen extends ConsumerWidget {
     required this.uid,
   });
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -71,7 +72,9 @@ class MobileChatScreen extends ConsumerWidget {
           const Expanded(
             child: ChatList(),
           ),
-          BottomChatField(),
+          BottomChatField(
+            receiverUserId: uid,
+          ),
         ],
       ),
     );
