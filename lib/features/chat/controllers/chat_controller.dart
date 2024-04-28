@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../../../models/chat_contact.dart';
+
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
   return ChatController(
@@ -21,6 +23,12 @@ class ChatController {
     required this.chatRepository,
     required this.ref,
   });
+
+Stream<List<ChatContact>> chatContacts() {
+  return chatRepository.getChatContact();
+}
+
+
 
   void sendTextMessage(
     BuildContext context,
