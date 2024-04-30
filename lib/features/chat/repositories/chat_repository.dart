@@ -1,6 +1,5 @@
 import 'package:chit_chat/common/enums/message_enum.dart';
 import 'package:chit_chat/common/utils/utils.dart';
-import 'package:chit_chat/info.dart';
 import 'package:chit_chat/models/chat_contact.dart';
 import 'package:chit_chat/models/message.dart';
 import 'package:chit_chat/models/user_model.dart';
@@ -49,7 +48,7 @@ class ChatRepository {
           receiverChatContact.toMap(),
         );
     var senderChatContact = ChatContact(
-      name: receiverUserData.name,
+      name: receiverUserData!.name,
       profilePic: receiverUserData.profilePic,
       contactId: receiverUserData.uid,
       timeSent: timeSent,
@@ -60,14 +59,6 @@ class ChatRepository {
         .doc(auth.currentUser!.uid)
         .collection('chats')
         .doc(receiverUserId)
-        .set(
-          senderChatContact.toMap(),
-        );
-    await firestore
-        .collection('users')
-        .doc(receiverUserId)
-        .collection('chats')
-        .doc(auth.currentUser!.uid)
         .set(
           senderChatContact.toMap(),
         );
@@ -101,6 +92,16 @@ class ChatRepository {
         .set(
           message.toMap(),
         );
+    await firestore
+        .collection('users')
+        .doc(receiverUserId)
+        .collection('chats')
+        .doc(auth.currentUser!.uid)
+        .collection('messages')
+        .doc(messageId)
+        .set(
+          message.toMap(),
+        );
   }
 
   void sendTextMessage({
@@ -111,7 +112,7 @@ class ChatRepository {
   }) async {
     try {
       var timeSent = DateTime.now();
-      UserModel receiverUserData;
+      UserModel? receiverUserData;
 
       var userDataMap =
           await firestore.collection('users').doc(receiverUserId).get();
@@ -141,7 +142,7 @@ class ChatRepository {
     }
   }
 
-  Stream<List<ChatContact>> getChatContact() {
+  Stream<List<ChatContact>> getChatContacts() {
     return firestore
         .collection('users')
         .doc(auth.currentUser!.uid)
@@ -151,19 +152,41 @@ class ChatRepository {
       List<ChatContact> contacts = [];
       for (var document in event.docs) {
         var chatContact = ChatContact.fromMap(document.data());
-        var userData =
-            await firestore.collection('users').doc(chatContact.contactId).get();
+        var userData = await firestore
+            .collection('users')
+            .doc(chatContact.contactId)
+            .get();
         var user = UserModel.fromMap(userData.data()!);
+
         contacts.add(
           ChatContact(
-              name: user.name,
-              profilePic: user.profilePic,
-              contactId: chatContact.contactId,
-              timeSent: chatContact.timeSent,
-              lastMessage: chatContact.lastMessage),
+            name: user.name,
+            profilePic: user.profilePic,
+            contactId: chatContact.contactId,
+            timeSent: chatContact.timeSent,
+            lastMessage: chatContact.lastMessage,
+          ),
         );
       }
       return contacts;
+    });
+  }
+
+  Stream<List<Message>> getChatStream(String receiverUserId) {
+    return firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('chats')
+        .doc(receiverUserId)
+        .collection('messages')
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      List<Message> messages = [];
+      for (var document in event.docs) {
+        messages.add(Message.fromMap(document.data()));
+      }
+      return messages;
     });
   }
 }
