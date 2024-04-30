@@ -1,7 +1,6 @@
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:chit_chat/features/chat/repositories/chat_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chit_chat/models/message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -25,9 +24,12 @@ class ChatController {
   });
 
 Stream<List<ChatContact>> chatContacts() {
-  return chatRepository.getChatContact();
+  return chatRepository.getChatContacts();
 }
 
+  Stream<List<Message>> chatStream(String receiverUserId) {
+    return chatRepository.getChatStream(receiverUserId);
+  }
 
 
   void sendTextMessage(

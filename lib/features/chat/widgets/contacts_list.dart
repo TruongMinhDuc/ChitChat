@@ -2,12 +2,11 @@ import 'package:chit_chat/common/widgets/loader.dart';
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
-import 'package:chit_chat/info.dart';
 import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../models/chat_contact.dart';
+import '../../../models/chat_contact.dart';
 
 class ContactsList extends ConsumerWidget {
   const ContactsList({super.key});

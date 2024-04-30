@@ -1,7 +1,5 @@
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../colors.dart';
@@ -140,11 +138,14 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
 
 
+              onTap: sendTextMessage,
+
+
+
               child: Icon(
                 isShowSendButton ? Icons.send : Icons.mic,
                 color: Colors.white,
               ),
-              onTap: sendTextMessage,
             ),
           ),
         ),

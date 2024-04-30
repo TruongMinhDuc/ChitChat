@@ -3,7 +3,7 @@ import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:chit_chat/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
-import 'package:chit_chat/widgets/chat_list.dart';
+import 'package:chit_chat/features/chat/widgets/chat_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/bottom_chat_field.dart';
@@ -18,7 +18,6 @@ class MobileChatScreen extends ConsumerWidget {
     required this.name,
     required this.uid,
   });
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,7 +44,6 @@ class MobileChatScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.normal,
-
                     ),
                   ),
                 ],
@@ -69,8 +67,10 @@ class MobileChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: ChatList(),
+          Expanded(
+            child: ChatList(
+              receiverUserId: uid,
+            ),
           ),
           BottomChatField(
             receiverUserId: uid,
@@ -80,5 +80,3 @@ class MobileChatScreen extends ConsumerWidget {
     );
   }
 }
-
-
