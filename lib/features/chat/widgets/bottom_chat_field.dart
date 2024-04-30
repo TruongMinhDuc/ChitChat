@@ -19,17 +19,17 @@ class BottomChatField extends ConsumerStatefulWidget {
 class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowSendButton = false;
 
-  final TextEditingController _messaageContrller = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
   void sendTextMessage() async {
     if (isShowSendButton) {
       ref.read(chatControllerProvider).sendTextMessage(
             context,
-            _messaageContrller.text.trim(),
+            _messageController.text.trim(),
             widget.receiverUserId,
           );
       setState(() {
-        _messaageContrller.text ='';
+        _messageController.clear();
       });
     }
   }
@@ -38,7 +38,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _messaageContrller.dispose();
+    _messageController.dispose();
   }
 
   @override
@@ -47,7 +47,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
       children: [
         Expanded(
           child: TextFormField(
-            controller: _messaageContrller,
+            controller: _messageController,
             onChanged: (val) {
               if (val.isNotEmpty) {
                 setState(() {
@@ -135,13 +135,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
             backgroundColor: Colors.green,
             radius: 25,
             child: GestureDetector(
-
-
-
               onTap: sendTextMessage,
-
-
-
               child: Icon(
                 isShowSendButton ? Icons.send : Icons.mic,
                 color: Colors.white,
