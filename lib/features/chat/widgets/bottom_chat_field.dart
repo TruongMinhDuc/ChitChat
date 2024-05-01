@@ -23,14 +23,17 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
   void sendTextMessage() async {
     if (isShowSendButton) {
-      ref.read(chatControllerProvider).sendTextMessage(
-            context,
-            _messageController.text.trim(),
-            widget.receiverUserId,
-          );
-      setState(() {
-        _messageController.clear();
-      });
+      var trimMessage = _messageController.text.replaceAll(' ', '');
+      if(trimMessage.isNotEmpty) {
+        ref.read(chatControllerProvider).sendTextMessage(
+          context,
+          _messageController.text.trim(),
+          widget.receiverUserId,
+        );
+        setState(() {
+          _messageController.clear();
+        });
+      }
     }
   }
 
