@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:chit_chat/common/enums/message_enum.dart';
+import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,16 +28,35 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   void sendTextMessage() async {
     if (isShowSendButton) {
       var trimMessage = _messageController.text.replaceAll(' ', '');
-      if(trimMessage.isNotEmpty) {
+      if (trimMessage.isNotEmpty) {
         ref.read(chatControllerProvider).sendTextMessage(
-          context,
-          _messageController.text.trim(),
-          widget.receiverUserId,
-        );
+              context,
+              _messageController.text.trim(),
+              widget.receiverUserId,
+            );
         setState(() {
           _messageController.clear();
         });
       }
+    }
+  }
+
+  void sendFileMessage(
+    File file,
+    MessageEnum messageEnum,
+  ) {
+    ref.read(chatControllerProvider).sendFileMessage(
+          context,
+          file,
+          widget.receiverUserId,
+          messageEnum,
+        );
+  }
+
+  void selectImage() async {
+    File? image = await pickImageFromGallery(context);
+    if (image != null) {
+      sendFileMessage(image, MessageEnum.image);
     }
   }
 
@@ -98,7 +121,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                   children: [
                     //TODO: chuc nang chon anh
                     IconButton(
-                      onPressed: () {},
+                      onPressed: selectImage,
                       icon: const Icon(
                         Icons.camera_alt,
                         color: Colors.grey,

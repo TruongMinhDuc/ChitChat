@@ -1,4 +1,5 @@
 import 'package:chit_chat/common/enums/message_enum.dart';
+import 'package:chit_chat/common/repositories/common_firebase_storage_repository.dart';
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/models/chat_contact.dart';
 import 'package:chit_chat/models/message.dart';
@@ -6,8 +7,11 @@ import 'package:chit_chat/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:io';
 
 final chatRepositoryProvider = Provider(
   (ref) => ChatRepository(
@@ -188,5 +192,66 @@ class ChatRepository {
       }
       return messages;
     });
+  }
+
+  void sendFileMessage({
+    required BuildContext context,
+    required File file,
+    required String receiverUserId,
+    required UserModel senderUserData,
+    required ProviderRef ref,
+    required MessageEnum messageEnum,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      var messageId = const Uuid().v1();
+
+      String fileUrl = await ref
+          .read(commonFirebaseStorageRepositoryProvider)
+          .storeFileToFirebase(
+              'chat/s{messageEnum.type}/${senderUserData.uid}/$receiverUserId/$messageId',
+              file);
+      UserModel receiverUserData;
+      var userDataMap =
+          await firestore.collection('users').doc(receiverUserId).get();
+      receiverUserData = UserModel.fromMap(userDataMap.data()!);
+      String contacMsg;
+      switch (messageEnum) {
+        case MessageEnum.image:
+          contacMsg = '📷 Photo';
+          break;
+        case MessageEnum.video:
+          contacMsg = '🎬 Video';
+          break;
+        case MessageEnum.audio:
+          contacMsg = '📼 Video';
+          break;
+        case MessageEnum.gif:
+          // TODO: Handle this case.
+          contacMsg = 'GIF';
+          break;
+        default:
+          contacMsg = 'Text';
+      }
+      _saveDataToContactSsSubcollection(
+        senderUserData,
+        receiverUserData,
+        contacMsg,
+        timeSent,
+        receiverUserId,
+      );
+
+      _saveMessageToMessagesSubcollection(
+        receiverUserId: receiverUserId,
+        text: fileUrl,
+        timeSent: timeSent,
+        messageId: messageId,
+        username: senderUserData.name,
+        receiverUsername: receiverUserData.name,
+        messageType: messageEnum,
+      );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
   }
 }

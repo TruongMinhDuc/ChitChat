@@ -1,14 +1,20 @@
+import 'package:chit_chat/common/enums/message_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
+
+import 'display_media_file.dart';
 
 class SenderMessageCard extends StatelessWidget {
   const SenderMessageCard({
     super.key,
     required this.message,
     required this.date,
+    required this.type,
   });
+
   final String message;
   final String date;
+  final MessageEnum type;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +32,19 @@ class SenderMessageCard extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  right: 30,
-                  top: 5,
-                  bottom: 20,
+                padding: type == MessageEnum.text
+                    ? const EdgeInsets.only(
+                        left: 10,
+                        right: 30,
+                        top: 5,
+                        bottom: 20,
+                      )
+                    : const EdgeInsets.only(
+                  bottom: 25,
                 ),
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
+                child: DisplayTextImageGIF(
+                  message: message,
+                  type: type,
                 ),
               ),
               Positioned(
@@ -46,7 +54,7 @@ class SenderMessageCard extends StatelessWidget {
                   date,
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.grey[600],
+                    color: Colors.white60,
                   ),
                 ),
               ),
