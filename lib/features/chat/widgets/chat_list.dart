@@ -2,7 +2,6 @@ import 'package:chit_chat/common/widgets/loader.dart';
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:chit_chat/info.dart';
 import 'package:chit_chat/widgets/my_message_card.dart';
 import 'package:chit_chat/widgets/sender_message_card.dart';
 import 'package:flutter/scheduler.dart';

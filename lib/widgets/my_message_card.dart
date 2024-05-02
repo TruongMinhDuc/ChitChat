@@ -36,6 +36,7 @@ class MyMessageCard extends StatelessWidget {
                   ),
                 ),
               ),
+              //Todo: sending short message timesent bubble not expand
               Positioned(
                 bottom: 2,
                 right: 10,
