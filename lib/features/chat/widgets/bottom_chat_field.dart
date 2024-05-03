@@ -60,6 +60,12 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  void selectVideo() async {
+    File? video = await pickVideoFromGallery(context);
+    if (video != null) {
+      sendFileMessage(video, MessageEnum.video);
+    }
+  }
   @override
   void dispose() {
     // TODO: implement dispose
@@ -119,7 +125,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    //TODO: chuc nang chon anh
+                    //chon anh
                     IconButton(
                       onPressed: selectImage,
                       icon: const Icon(
@@ -127,9 +133,9 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                         color: Colors.grey,
                       ),
                     ),
-                    //TODO: chuc nang chon tep tin
+                    //chon video
                     IconButton(
-                      onPressed: () {},
+                      onPressed: selectVideo,
                       icon: const Icon(
                         Icons.attach_file,
                         color: Colors.grey,

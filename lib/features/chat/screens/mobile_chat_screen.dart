@@ -40,7 +40,7 @@ class MobileChatScreen extends ConsumerWidget {
                 children: [
                   Text(name),
                   Text(
-                    _isOnline ? 'online' : 'offline',
+                    _isOnline ? '🟢 online' : '⚪ offline',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.normal,
