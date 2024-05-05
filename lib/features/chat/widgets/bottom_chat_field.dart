@@ -27,7 +27,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   final TextEditingController _messageController = TextEditingController();
   bool isShowEmojiContainer = false;
   FocusNode focusNode = FocusNode();
-  var keyboardType = TextInputType.text;
 
   void hideEmojiContainer() {
     setState(() {
@@ -41,21 +40,21 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     });
   }
 
-  void showKeyboard() => focusNode.requestFocus();
-
-  void hideKeyboard() => focusNode.unfocus();
+  // void showKeyboard() => focusNode.requestFocus();
+  // void hideKeyboard() => focusNode.unfocus();
 
   void toggleEmojiKeyboardContainer() {
     if (isShowEmojiContainer) {
-      showKeyboard();
+      //showKeyboard();
       hideEmojiContainer();
     } else {
-      hideKeyboard();
+      //hideKeyboard();
       showEmojiContainer();
     }
   }
 
   void sendTextMessage() async {
+    //print('sent message');
     if (isShowSendButton) {
       var trimMessage = _messageController.text.replaceAll(' ', '');
       if (trimMessage.isNotEmpty) {
@@ -98,6 +97,17 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  // void selectGIF() async {
+  //   final gif = await pickGIF(context);
+  //   if (gif != null) {
+  //     ref.read(chatControllerProvider).sendGIFMessage(
+  //           context,
+  //           gif.url,
+  //           widget.receiverUserId,
+  //         );
+  //   }
+  // }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -115,7 +125,8 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
               child: TextFormField(
                 focusNode: focusNode,
                 controller: _messageController,
-                keyboardType: keyboardType,
+                showCursor: true,
+                readOnly: isShowEmojiContainer,
                 onChanged: (val) {
                   if (val.isNotEmpty) {
                     setState(() {
@@ -144,7 +155,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                               color: Colors.grey,
                             ),
                           ),
-                          // TODO: chuc nang chon gif
+                          // gif
                           IconButton(
                             onPressed: () {},
                             icon: const Icon(
@@ -223,7 +234,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                     //   _messageController.text =
                     //       _messageController.text + emoji.emoji;
                     // });
-                    if(!isShowSendButton) {
+                    if (!isShowSendButton) {
                       setState(() {
                         isShowSendButton = true;
                       });

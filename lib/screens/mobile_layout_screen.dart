@@ -38,18 +38,19 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
       case AppLifecycleState.resumed:
         ref.read(authControllerProvider).setUserState(true);
         break;
-      //case AppLifecycleState.inactive:
+      case AppLifecycleState.inactive:
       case AppLifecycleState.detached:
       case AppLifecycleState.paused:
         ref.read(authControllerProvider).setUserState(false);
         break;
       default:
-        ref.read(authControllerProvider).setUserState(true);
+        ref.read(authControllerProvider).setUserState(false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.read(authControllerProvider).setUserState(true);
     return DefaultTabController(
       length: 3,
       child: Scaffold(

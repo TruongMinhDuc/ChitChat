@@ -79,7 +79,7 @@ class ChatRepository {
   }) async {
     final message = Message(
       senderId: auth.currentUser!.uid,
-      receiverid: receiverUserId,
+      receiverId: receiverUserId,
       text: text,
       type: messageType,
       timeSent: timeSent,
