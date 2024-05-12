@@ -12,7 +12,6 @@ import '../../../colors.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String receiverUserId;
-
   const BottomChatField({
     super.key,
     required this.receiverUserId,
@@ -28,6 +27,17 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowEmojiContainer = false;
   FocusNode focusNode = FocusNode();
 
+
+  // void selectGIF() async {
+  //   final gif = await pickGIF(context);
+  //   if (gif != null) {
+  //     ref.read(chatControllerProvider).sendGIFMessage(
+  //       context,
+  //       gif.url,
+  //       widget.receiverUserId
+  //     );
+  //   }
+  // }
   void hideEmojiContainer() {
     setState(() {
       isShowEmojiContainer = false;

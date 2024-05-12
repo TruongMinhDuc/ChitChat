@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
+
 import 'package:uuid/uuid.dart';
 import 'dart:io';
 
@@ -29,7 +30,7 @@ class ChatRepository {
     required this.auth,
   });
 
-  _saveDataToContactSsSubcollection(
+  void _saveDataToContactSsSubcollection(
     UserModel senderUserData,
     UserModel receiverUserData,
     String text,
@@ -254,4 +255,47 @@ class ChatRepository {
       showSnackBar(context: context, content: e.toString());
     }
   }
+  void sendGIFMessage({
+    required BuildContext context,
+    required String gifUrl,
+    required String receiverUserId,
+    required UserModel senderUser,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      UserModel? receiverUserData;
+
+      var userDataMap =
+      await firestore.collection('users').doc(receiverUserId).get();
+
+      receiverUserData = UserModel.fromMap(userDataMap.data()!);
+      var messageId = const Uuid().v1();
+
+      _saveDataToContactSsSubcollection(
+        senderUser,
+        receiverUserData,
+        'GIF',
+        timeSent,
+        receiverUserId,
+      );
+
+      _saveMessageToMessagesSubcollection(
+        receiverUserId: receiverUserId,
+        text: gifUrl,
+        timeSent: timeSent,
+        messageType: MessageEnum.text,
+        messageId: messageId,
+        receiverUsername: receiverUserData.name,
+        username: senderUser.name,
+      );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
 }
+
+
+
+
+
+

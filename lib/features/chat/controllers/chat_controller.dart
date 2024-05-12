@@ -34,29 +34,27 @@ class ChatController {
     return chatRepository.getChatStream(receiverUserId);
   }
 
-  void sendTextMessage(
-    BuildContext context,
-    String text,
-    String receiverUserId,
-  ) {
+  void sendTextMessage(BuildContext context,
+      String text,
+      String receiverUserId,) {
     ref.read(userDataAuthProvider).whenData(
-          (value) => chatRepository.sendTextMessage(
+          (value) =>
+          chatRepository.sendTextMessage(
             context: context,
             text: text,
             receiverUserId: receiverUserId,
             senderUser: value!,
           ),
-        );
+    );
   }
 
-  void sendFileMessage(
-    BuildContext context,
-    File file,
-    String receiverUserId,
-    MessageEnum messageEnum,
-  ) {
+  void sendFileMessage(BuildContext context,
+      File file,
+      String receiverUserId,
+      MessageEnum messageEnum,) {
     ref.read(userDataAuthProvider).whenData(
-          (value) => chatRepository.sendFileMessage(
+          (value) =>
+          chatRepository.sendFileMessage(
             context: context,
             file: file,
             receiverUserId: receiverUserId,
@@ -64,6 +62,25 @@ class ChatController {
             ref: ref,
             messageEnum: messageEnum,
           ),
-        );
+    );
+  }
+
+  void sendGIFMessage(BuildContext context,
+      String gifUrl,
+      String receiverUserId,) {
+    final messageReply = ref.read(userDataAuthProvider);
+    int gifUrlPartIndex = gifUrl.lastIndexOf('-') + 1;
+    String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
+    String newgifUrl = 'https://i.giphy.com/media/$gifUrlPart/200.gif';
+
+    ref.read(userDataAuthProvider).whenData(
+          (value) =>
+          chatRepository.sendGIFMessage(
+              context: context,
+              gifUrl: newgifUrl,
+              receiverUserId: receiverUserId,
+              senderUser: value!
+          ),
+    );
   }
 }
