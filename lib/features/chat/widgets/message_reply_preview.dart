@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chit_chat/common/providers/message_reply_provider.dart';
-import 'package:chit_chat/features/chat/widgets/display_media_file.dart';
+
+import '../../../common/providers/message_reply_provider.dart';
+import 'display_media_file.dart';
+
 
 class MessageReplyPreview extends ConsumerWidget {
-  const MessageReplyPreview({super.key});
+  const MessageReplyPreview({Key? key}) : super(key: key);
 
   void cancelReply(WidgetRef ref) {
     ref.read(messageReplyProvider.state).update((state) => null);

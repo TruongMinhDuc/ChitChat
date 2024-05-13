@@ -78,9 +78,10 @@ class ChatRepository {
     required String messageId,
     required String username,
     required MessageEnum messageType,
+
     required MessageReply? messageReply,
     required String senderUsername,
-    required String? receiverUserName,
+    required String receiverUserName,
   }) async {
     final message = Message(
       senderId: auth.currentUser!.uid,
@@ -90,14 +91,15 @@ class ChatRepository {
       timeSent: timeSent,
       messageId: messageId,
       isSeen: false,
+
       repliedMessage: messageReply == null ? '' : messageReply.message,
       repliedTo: messageReply == null
           ? ''
           : messageReply.isMe
-          ? senderUsername
-          : receiverUserName ?? '',
+              ? senderUsername
+              : receiverUserName,
       repliedMessageType:
-        messageReply == null ? MessageEnum.text : messageReply.messageEnum,
+           messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
     await firestore
         .collection('users')
@@ -107,7 +109,7 @@ class ChatRepository {
         .collection('messages')
         .doc(messageId)
         .set(
-      message.toMap(),
+          message.toMap(),
         );
     await firestore
         .collection('users')
@@ -154,6 +156,7 @@ class ChatRepository {
         messageId: messageId,
         receiverUserName: receiverUserData.name,
         username: senderUser.name,
+
         messageReply: messageReply,
         senderUsername: senderUser.name,
       );
@@ -217,6 +220,7 @@ class ChatRepository {
     required UserModel senderUserData,
     required ProviderRef ref,
     required MessageEnum messageEnum,
+
     required MessageReply? messageReply,
   }) async {
     try {
@@ -241,7 +245,7 @@ class ChatRepository {
           contacMsg = '🎬 Video';
           break;
         case MessageEnum.audio:
-          contacMsg = '📼 Video';
+          contacMsg = '🎶 Audio';
           break;
         case MessageEnum.gif:
           // TODO: Handle this case.
@@ -266,6 +270,7 @@ class ChatRepository {
         username: senderUserData.name,
         receiverUserName: receiverUserData.name,
         messageType: messageEnum,
+
         messageReply: messageReply,
         senderUsername: senderUserData.name,
       );
@@ -273,11 +278,13 @@ class ChatRepository {
       showSnackBar(context: context, content: e.toString());
     }
   }
+
   void sendGIFMessage({
     required BuildContext context,
     required String gifUrl,
     required String receiverUserId,
     required UserModel senderUser,
+
     required MessageReply? messageReply,
   }) async {
     try {
@@ -285,7 +292,7 @@ class ChatRepository {
       UserModel? receiverUserData;
 
       var userDataMap =
-      await firestore.collection('users').doc(receiverUserId).get();
+          await firestore.collection('users').doc(receiverUserId).get();
 
       receiverUserData = UserModel.fromMap(userDataMap.data()!);
       var messageId = const Uuid().v1();
@@ -306,19 +313,20 @@ class ChatRepository {
         messageId: messageId,
         receiverUserName: receiverUserData.name,
         username: senderUser.name,
+
         messageReply: messageReply,
         senderUsername: senderUser.name,
-
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
   }
+
   void setChatMessageSeen(
-      BuildContext context,
-      String receiverUserId,
-      String messageId,
-      ) async {
+    BuildContext context,
+    String receiverUserId,
+    String messageId,
+  ) async {
     try {
       await firestore
           .collection('users')
@@ -342,9 +350,3 @@ class ChatRepository {
     }
   }
 }
-
-
-
-
-
-

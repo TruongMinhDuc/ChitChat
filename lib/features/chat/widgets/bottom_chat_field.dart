@@ -4,8 +4,10 @@ import 'package:chit_chat/common/enums/message_enum.dart';
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,6 +19,7 @@ import 'message_reply_preview.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String receiverUserId;
+
   const BottomChatField({
     super.key,
     required this.receiverUserId,
@@ -28,11 +31,14 @@ class BottomChatField extends ConsumerStatefulWidget {
 
 class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowSendButton = false;
+
   final TextEditingController _messageController = TextEditingController();
+
   FlutterSoundRecorder? _soundRecorder;
   bool isRecorderInit = false;
   bool isShowEmojiContainer = false;
   bool isRecording = false;
+
   FocusNode focusNode = FocusNode();
 
   @override
@@ -50,7 +56,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     await _soundRecorder!.openRecorder();
     isRecorderInit = true;
   }
-
 
   // void selectGIF() async {
   //   final gif = await pickGIF(context);
@@ -102,7 +107,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
           isShowSendButton = false;
         });
       }
-    }else {
+    } else {
       var tempDir = await getTemporaryDirectory();
       var path = '${tempDir.path}/flutter_sound.aac';
       if (!isRecorderInit) {
@@ -167,7 +172,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     _messageController.dispose();
     _soundRecorder!.closeRecorder();
     isRecorderInit = false;
-
   }
 
   @override
@@ -177,6 +181,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     return Column(
       children: [
         isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
+        const SizedBox(width: 100,),
         Row(
           children: [
             Expanded(
@@ -267,14 +272,18 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 right: 2,
                 left: 2,
               ),
-              //TODO: chuc nang gui tin nhan va thu am
+              // chuc nang gui tin nhan va thu am
               child: CircleAvatar(
                 backgroundColor: Colors.green,
                 radius: 25,
                 child: GestureDetector(
                   onTap: sendTextMessage,
                   child: Icon(
-                    isShowSendButton ? Icons.send : isRecording ? Icons.close: Icons.mic,
+                    isShowSendButton
+                        ? Icons.send
+                        : isRecording
+                            ? Icons.close
+                            : Icons.mic,
                     color: Colors.white,
                   ),
                 ),

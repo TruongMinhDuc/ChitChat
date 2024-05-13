@@ -1,18 +1,22 @@
 import 'package:chit_chat/common/enums/message_enum.dart';
+import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/chat/widgets/display_media_file.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
 import 'package:swipe_to/swipe_to.dart';
-import 'package:flutter/src/gestures/drag_details.dart';
+
 
 class MyMessageCard extends StatelessWidget {
   final String message;
   final String date;
   final MessageEnum type;
-  final void Function(DragUpdateDetails) onLeftSwipe ;
+
+  final VoidCallback onLeftSwipe;
+
   final String repliedText;
   final String username;
   final MessageEnum repliedMessageType;
+
   final bool isSeen;
 
   const MyMessageCard({
@@ -23,16 +27,25 @@ class MyMessageCard extends StatelessWidget {
     required this.onLeftSwipe,
     required this.repliedText,
     required this.username,
+
     required this.repliedMessageType,
     required this.isSeen,
   });
+
+  void onLeft() {
+    onLeftSwipe;
+    //print("swipe left");
+  }
 
   @override
   Widget build(BuildContext context) {
     final isReplying = repliedText.isNotEmpty;
 
     return SwipeTo(
-      onLeftSwipe: onLeftSwipe,
+      onLeftSwipe: (detail) {
+        onLeft();
+      },
+        //showSnackBar(context: context, content: "lef swipe");
       child: Align(
         alignment: Alignment.centerRight,
         child: ConstrainedBox(
