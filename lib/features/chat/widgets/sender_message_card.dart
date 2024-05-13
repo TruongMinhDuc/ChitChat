@@ -20,7 +20,7 @@ class SenderMessageCard extends StatelessWidget {
   final String message;
   final String date;
   final MessageEnum type;
-  final void Function(DragUpdateDetails)? onRightSwipe;
+  final VoidCallback onRightSwipe;
   final String repliedText;
   final String username;
   final MessageEnum repliedMessageType;
@@ -53,11 +53,43 @@ class SenderMessageCard extends StatelessWidget {
                         bottom: 20,
                       )
                     : const EdgeInsets.only(
+                  left: 5,
+                  top: 5,
+                  right: 5,
                   bottom: 25,
                 ),
-                child: DisplayTextImageGIF(
-                  message: message,
-                  type: type,
+                child: Column(
+                  children: [
+                    if (isReplying) ...[
+                      Text(
+                        username,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: backgroundColor.withOpacity(0.5),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(
+                              5,
+                            ),
+                          ),
+                        ),
+                        child: DisplayTextImageGIF(
+                          message: repliedText,
+                          type: repliedMessageType,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                    DisplayTextImageGIF(
+                      message: message,
+                      type: type,
+                    ),
+                  ],
                 ),
               ),
               Positioned(
@@ -67,7 +99,7 @@ class SenderMessageCard extends StatelessWidget {
                   date,
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.white60,
+                    color: Colors.grey[600],
                   ),
                 ),
               ),

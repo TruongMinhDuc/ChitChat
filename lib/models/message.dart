@@ -28,12 +28,15 @@ class Message {
   Map<String, dynamic> toMap() {
     return {
       'senderId': senderId,
-      'receiverid': receiverId,
+      'receiverId': receiverId,
       'text': text,
       'type': type.type,
       'timeSent': timeSent.millisecondsSinceEpoch,
       'messageId': messageId,
       'isSeen': isSeen,
+      'repliedMessage': repliedMessage,
+      'repliedTo': repliedTo,
+      'repliedMessageType': repliedMessageType.type,
     };
   }
 

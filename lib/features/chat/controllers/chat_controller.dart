@@ -50,6 +50,7 @@ class ChatController {
             messageReply: messageReply
           ),
     );
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
   void sendFileMessage(BuildContext context,

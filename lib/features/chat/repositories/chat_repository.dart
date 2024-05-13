@@ -34,7 +34,7 @@ class ChatRepository {
 
   void _saveDataToContactSsSubcollection(
     UserModel senderUserData,
-    UserModel receiverUserData,
+    UserModel? receiverUserData,
     String text,
     DateTime timeSent,
     String receiverUserId,
@@ -97,7 +97,7 @@ class ChatRepository {
           ? senderUsername
           : receiverUserName ?? '',
       repliedMessageType:
-      messageReply == null ? MessageEnum.text : messageReply.messageEnum,
+        messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
     await firestore
         .collection('users')

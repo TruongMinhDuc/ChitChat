@@ -4,7 +4,7 @@ import 'package:chit_chat/common/providers/message_reply_provider.dart';
 import 'package:chit_chat/features/chat/widgets/display_media_file.dart';
 
 class MessageReplyPreview extends ConsumerWidget {
-  const MessageReplyPreview({Key? key}) : super(key: key);
+  const MessageReplyPreview({super.key});
 
   void cancelReply(WidgetRef ref) {
     ref.read(messageReplyProvider.state).update((state) => null);
