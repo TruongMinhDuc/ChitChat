@@ -189,6 +189,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 focusNode: focusNode,
                 controller: _messageController,
                 showCursor: true,
+                maxLines: null,
                 readOnly: isShowEmojiContainer,
                 onChanged: (val) {
                   if (val.isNotEmpty) {
