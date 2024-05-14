@@ -18,6 +18,7 @@ class MobileChatScreen extends ConsumerWidget {
     required this.name,
     required this.uid,
   });
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

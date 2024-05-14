@@ -7,6 +7,7 @@ import 'package:chit_chat/models/message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../../../common/providers/message_reply_provider.dart';
 import '../../../models/chat_contact.dart';
 
 final chatControllerProvider = Provider((ref) {
@@ -39,14 +40,17 @@ class ChatController {
     String text,
     String receiverUserId,
   ) {
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendTextMessage(
             context: context,
             text: text,
             receiverUserId: receiverUserId,
             senderUser: value!,
+            messageReply: messageReply,
           ),
         );
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
   void sendFileMessage(
@@ -55,6 +59,7 @@ class ChatController {
     String receiverUserId,
     MessageEnum messageEnum,
   ) {
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendFileMessage(
             context: context,
@@ -63,7 +68,43 @@ class ChatController {
             senderUserData: value!,
             ref: ref,
             messageEnum: messageEnum,
+            messageReply: messageReply,
           ),
         );
+    ref.read(messageReplyProvider.state).update((state) => null);
+  }
+
+  // void sendGIFMessage(
+  //   BuildContext context,
+  //   String gifUrl,
+  //   String receiverUserId,
+  // ) {
+  //   final messageReply = ref.read(messageReplyProvider);
+  //   int gifUrlPartIndex = gifUrl.lastIndexOf('-') + 1;
+  //   String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
+  //   String newgifUrl = 'https://i.giphy.com/media/$gifUrlPart/200.gif';
+  //
+  //   ref.read(userDataAuthProvider).whenData(
+  //         (value) => chatRepository.sendGIFMessage(
+  //           context: context,
+  //           gifUrl: newgifUrl,
+  //           receiverUserId: receiverUserId,
+  //           senderUser: value!,
+  //           messageReply: messageReply,
+  //         ),
+  //       );
+  //   ref.read(messageReplyProvider.state).update((state) => null);
+  // }
+
+  void setChatMessageSeen(
+    BuildContext context,
+    String receiverUserId,
+    String messageId,
+  ) {
+    chatRepository.setChatMessageSeen(
+      context,
+      receiverUserId,
+      messageId,
+    );
   }
 }
