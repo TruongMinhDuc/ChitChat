@@ -3,10 +3,11 @@ import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/chat/widgets/display_media_file.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
+import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:swipe/swipe.dart';
+import 'package:swipe_plus/swipe_plus.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:swipe_widget/swipe_widget.dart';
-
 
 class MyMessageCard extends StatelessWidget {
   final String message;
@@ -29,7 +30,6 @@ class MyMessageCard extends StatelessWidget {
     required this.onLeftSwipe,
     required this.repliedText,
     required this.username,
-
     required this.repliedMessageType,
     required this.isSeen,
   });
@@ -43,10 +43,9 @@ class MyMessageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isReplying = repliedText.isNotEmpty;
 
-    return SwipeTo(
-    onLeftSwipe: (details) {
-      if(true) {onLeftSwipe;}
-    },
+    return SwipePlus(
+      dragDirection: DragDirection.RTL,
+      onDragComplete: onLeftSwipe,
       //showSnackBar(context: context, content: "lef swipe");
       child: Align(
         alignment: Alignment.centerRight,
@@ -57,7 +56,7 @@ class MyMessageCard extends StatelessWidget {
           child: Card(
             elevation: 1,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             color: messageColor,
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             child: Stack(
@@ -65,17 +64,17 @@ class MyMessageCard extends StatelessWidget {
                 Padding(
                   padding: type == MessageEnum.text
                       ? const EdgeInsets.only(
-                    left: 10,
-                    right: 30,
-                    top: 5,
-                    bottom: 20,
-                  )
+                          left: 10,
+                          right: 30,
+                          top: 5,
+                          bottom: 20,
+                        )
                       : const EdgeInsets.only(
-                    left: 5,
-                    top: 5,
-                    right: 5,
-                    bottom: 25,
-                  ),
+                          left: 5,
+                          top: 5,
+                          right: 5,
+                          bottom: 25,
+                        ),
                   child: Column(
                     children: [
                       if (isReplying) ...[
