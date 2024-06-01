@@ -1,13 +1,8 @@
 import 'package:chit_chat/common/enums/message_enum.dart';
-import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/chat/widgets/display_media_file.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
-import 'package:swipe/swipe.dart';
 import 'package:swipe_plus/swipe_plus.dart';
-import 'package:swipe_to/swipe_to.dart';
-import 'package:swipe_widget/swipe_widget.dart';
 
 class MyMessageCard extends StatelessWidget {
   final String message;

@@ -1,10 +1,15 @@
+
+import 'dart:io';
 import 'package:chit_chat/common/widgets/error.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
 import 'package:chit_chat/features/auth/screens/otp_screen.dart';
 import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
+import 'package:chit_chat/features/select_contacts/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter/material.dart';
+
+
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -40,6 +45,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => MobileChatScreen(
           name: name,
           uid: uid,
+        ),
+      );
+
+    case ConfirmStatusScreen.routeName:
+      final file = settings.arguments as File;
+      return MaterialPageRoute(
+        builder: (context) => ConfirmStatusScreen(
+          file: file,
         ),
       );
 

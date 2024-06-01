@@ -1,7 +1,11 @@
-import 'dart:ui';
+import 'dart:io';
+import 'dart:math';
 
+import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
+import 'package:chit_chat/features/select_contacts/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
+import 'package:chit_chat/features/status/screens/status_contacts_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
@@ -17,19 +21,24 @@ class MobileLayoutScreen extends ConsumerStatefulWidget {
 }
 
 class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
-    with WidgetsBindingObserver {
+    with WidgetsBindingObserver, TickerProviderStateMixin {
+  late TabController tabBarController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    tabBarController = TabController(length: 3, vsync: this);
     WidgetsBinding.instance.addObserver(this);
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
   }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
@@ -76,15 +85,16 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               onPressed: () {},
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
+            controller: tabBarController,
             indicatorColor: tabColor,
             indicatorWeight: 4,
             labelColor: tabColor,
             unselectedLabelColor: Colors.grey,
-            labelStyle: TextStyle(
+            labelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-            tabs: [
+            tabs: const [
               Tab(
                 text: 'CHATS',
               ),
@@ -97,14 +107,32 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             ],
           ),
         ),
-        body: const ContactsList(),
+        body: TabBarView(
+          controller: tabBarController,
+          children: const [
+            ContactsList(),
+            StatusContactsScreen(),
+            Text('Need call feature add'),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SelectContactsScreen.routeName);
+          onPressed: () async {
+            if (tabBarController.index == 0) {
+              Navigator.pushNamed(context, SelectContactsScreen.routeName);
+            } else {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
+            }
           },
           backgroundColor: tabColor,
           child: const Icon(
-            Icons.comment,
+            Icons.person_add_alt_1_rounded,
             color: Colors.white,
           ),
         ),

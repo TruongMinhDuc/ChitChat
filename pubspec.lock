@@ -129,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
-  card_swiper:
-    dependency: "direct main"
-    description:
-      name: card_swiper
-      sha256: "21e52a144decbf0054e7cfed8bbe46fc89635e6c86b767eaccfe7d5aeba32528"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   characters:
     dependency: transitive
     description:
@@ -510,14 +502,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.4.6"
-  flutter_swipe_detector:
-    dependency: "direct main"
-    description:
-      name: flutter_swipe_detector
-      sha256: ae6fe331de414632c0122a7047d64dfe2332c95b3f06a05118a7ea538ff19eda
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -1037,14 +1021,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  swipe_widget:
-    dependency: "direct main"
-    description:
-      name: swipe_widget
-      sha256: d27ed9dcc608ec757c8d36b4b00f8fd8b2d56bddca7ff8437b40adb52a86c6f1
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2+1"
   synchronized:
     dependency: transitive
     description:
