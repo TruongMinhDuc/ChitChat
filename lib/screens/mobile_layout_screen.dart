@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
-import 'package:chit_chat/features/select_contacts/screens/confirm_status_screen.dart';
+import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/status/screens/status_contacts_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -132,7 +132,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           },
           backgroundColor: tabColor,
           child: const Icon(
-            Icons.person_add_alt_1_rounded,
+            Icons.add,
             color: Colors.white,
           ),
         ),

@@ -1,19 +1,17 @@
-
 import 'dart:io';
 import 'package:chit_chat/common/widgets/error.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
 import 'package:chit_chat/features/auth/screens/otp_screen.dart';
 import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
-import 'package:chit_chat/features/select_contacts/screens/confirm_status_screen.dart';
+import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
+import 'package:chit_chat/features/status/screens/status_screen.dart';
+import 'package:chit_chat/models/status_model.dart';
 import 'package:flutter/material.dart';
-
-
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-
     case LoginScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const LoginScreen(),
@@ -53,6 +51,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => ConfirmStatusScreen(
           file: file,
+        ),
+      );
+    case StatusScreen.routeName:
+      final status = settings.arguments as Status;
+      return MaterialPageRoute(
+        builder: (context) => StatusScreen(
+          status: status,
         ),
       );
 
