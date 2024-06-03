@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
+import 'package:chit_chat/features/group/screens/create_group_screen.dart';
 import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/status/screens/status_contacts_screen.dart';
@@ -80,10 +81,24 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
-            IconButton(
-              icon: const Icon(Icons.more_vert, color: Colors.grey),
-              onPressed: () {},
-            ),
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              color: Colors.grey,
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text('Create Group'),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                      context,
+                      CreateGroupScreen.routeName,
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
           bottom: TabBar(
             controller: tabBarController,

@@ -3,6 +3,7 @@ import 'package:chit_chat/common/widgets/error.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
 import 'package:chit_chat/features/auth/screens/otp_screen.dart';
 import 'package:chit_chat/features/auth/screens/user_infomation_screen.dart';
+import 'package:chit_chat/features/group/screens/create_group_screen.dart';
 import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
@@ -59,6 +60,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => StatusScreen(
           status: status,
         ),
+      );
+    case CreateGroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CreateGroupScreen(),
       );
 
     default:
