@@ -213,7 +213,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 50,
                       child: Row(
                         children: [
                           //emoji
@@ -225,13 +225,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             ),
                           ),
                           // gif
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.gif,
-                              color: Colors.grey,
-                            ),
-                          ),
+                          // IconButton(
+                          //   onPressed: () {},
+                          //   icon: const Icon(
+                          //     Icons.gif,
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

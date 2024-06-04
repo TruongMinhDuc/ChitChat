@@ -9,6 +9,7 @@ import 'package:chit_chat/features/group/widgets/select_contacts_group.dart';
 
 class CreateGroupScreen extends ConsumerStatefulWidget {
   static const String routeName = '/create-group';
+
   const CreateGroupScreen({Key? key}) : super(key: key);
 
   @override
@@ -27,11 +28,11 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
   void createGroup() {
     if (groupNameController.text.trim().isNotEmpty && image != null) {
       ref.read(groupControllerProvider).createGroup(
-        context,
-        groupNameController.text.trim(),
-        image!,
-        ref.read(selectedGroupContacts),
-      );
+            context,
+            groupNameController.text.trim(),
+            image!,
+            ref.read(selectedGroupContacts),
+          );
       ref.read(selectedGroupContacts.state).update((state) => []);
       Navigator.pop(context);
     }
@@ -57,17 +58,17 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
               children: [
                 image == null
                     ? const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
-                  ),
-                  radius: 64,
-                )
+                        backgroundImage: NetworkImage(
+                          'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
+                        ),
+                        radius: 64,
+                      )
                     : CircleAvatar(
-                  backgroundImage: FileImage(
-                    image!,
-                  ),
-                  radius: 64,
-                ),
+                        backgroundImage: FileImage(
+                          image!,
+                        ),
+                        radius: 64,
+                      ),
                 Positioned(
                   bottom: -10,
                   left: 80,
