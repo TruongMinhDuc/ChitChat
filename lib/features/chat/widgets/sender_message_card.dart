@@ -2,7 +2,6 @@ import 'package:chit_chat/common/enums/message_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
 import 'package:swipe_plus/swipe_plus.dart';
-import 'package:swipe_to/swipe_to.dart';
 
 import 'display_media_file.dart';
 

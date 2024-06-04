@@ -1,5 +1,4 @@
 import 'package:cached_video_player/cached_video_player.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VideoPlayerItem extends StatefulWidget {
@@ -60,7 +59,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                     _visible = !_visible;
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                     Icons.play_arrow,
                   size: 40,
                 ),

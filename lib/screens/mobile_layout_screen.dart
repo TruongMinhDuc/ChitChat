@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
@@ -7,11 +6,9 @@ import 'package:chit_chat/features/group/screens/create_group_screen.dart';
 import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/status/screens/status_contacts_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/features/chat/widgets/contacts_list.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {

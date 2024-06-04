@@ -1,8 +1,6 @@
 import 'package:chit_chat/common/widgets/loader.dart';
 import 'package:flutter/material.dart';
-import 'package:story_view/controller/story_controller.dart';
 import 'package:story_view/story_view.dart';
-import 'package:story_view/widgets/story_view.dart';
 
 import '../../../models/status_model.dart';
 

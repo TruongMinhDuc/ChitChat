@@ -10,7 +10,7 @@ import 'package:chit_chat/features/group/widgets/select_contacts_group.dart';
 class CreateGroupScreen extends ConsumerStatefulWidget {
   static const String routeName = '/create-group';
 
-  const CreateGroupScreen({Key? key}) : super(key: key);
+  const CreateGroupScreen({super.key});
 
   @override
   ConsumerState<CreateGroupScreen> createState() => _CreateGroupScreenState();
