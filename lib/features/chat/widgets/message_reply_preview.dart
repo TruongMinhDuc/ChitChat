@@ -20,7 +20,7 @@ class MessageReplyPreview extends ConsumerWidget {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Container(
-        width: MediaQuery.sizeOf(context).width ,
+        width: MediaQuery.sizeOf(context).width/1.151,
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
           color: mobileChatBoxColor,
@@ -51,7 +51,7 @@ class MessageReplyPreview extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 5),
             DisplayTextImageGIF(
               message: messageReply.message,
               type: messageReply.messageEnum,

@@ -20,10 +20,12 @@ class DisplayTextImageGIF extends StatelessWidget {
     final AudioPlayer audioPlayer = AudioPlayer();
     return type == MessageEnum.text
         ? Text(
+            textAlign: TextAlign.left,
             message,
             style: const TextStyle(
               fontSize: 16,
             ),
+
           )
         : type == MessageEnum.audio
         ? StatefulBuilder(builder: (context, setState) {
