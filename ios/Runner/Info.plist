@@ -47,5 +47,8 @@
 	<true/>
 	<key>NSContactsUsageDescription</key>
     <string>Contact list to chat</string>
+
+    <key>MicrophoneUsageDescription</key>
+    <key>CameraUsageDescription</key>
 </dict>
 </plist>
