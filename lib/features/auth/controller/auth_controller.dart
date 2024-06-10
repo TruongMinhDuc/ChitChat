@@ -59,4 +59,7 @@ class AuthController {
     return authRepository.setUserState(isOnline);
   }
 
+  void signOut() {
+    authRepository.signOut();
+  }
 }
