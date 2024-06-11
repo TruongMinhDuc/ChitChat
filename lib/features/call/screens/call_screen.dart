@@ -62,6 +62,11 @@ class _CallScreenState extends ConsumerState<CallScreen> {
                               widget.call.receiverId,
                               context,
                             );
+                        ref.read(callControllerProvider).endGroupCall(
+                              widget.call.callerId,
+                              widget.call.receiverId,
+                              context,
+                            );
                         Navigator.pop(context);
                       },
                       icon: const Icon(

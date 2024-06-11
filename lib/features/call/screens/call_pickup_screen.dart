@@ -62,6 +62,11 @@ class CallPickupScreen extends ConsumerWidget {
                                   call.receiverId,
                                   context,
                                 );
+                            ref.read(callControllerProvider).endGroupCall(
+                                  call.callerId,
+                                  call.receiverId,
+                                  context,
+                                );
                             Navigator.pop(context);
                           },
                           icon: const Icon(Icons.call_end,
