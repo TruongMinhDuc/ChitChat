@@ -1,4 +1,3 @@
-
 import 'package:chit_chat/features/chat/widgets/sender_message_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,12 +87,10 @@ class _ChatListState extends ConsumerState<ChatList> {
 
               if (messageData.senderId ==
                   FirebaseAuth.instance.currentUser!.uid) {
-
                 return MyMessageCard(
                   message: messageData.text,
                   date: DateFormat.Hm().format(messageData.timeSent),
                   type: messageData.type,
-
                   repliedText: messageData.repliedMessage,
                   username: messageData.repliedTo,
                   repliedMessageType: messageData.repliedMessageType,
