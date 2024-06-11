@@ -5,6 +5,7 @@ import 'package:chit_chat/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/features/chat/widgets/chat_list.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../call/controller/call_controller.dart';
@@ -16,8 +17,9 @@ class MobileChatScreen extends ConsumerWidget {
   final String uid;
   final bool isGroupChat;
   final String profilePic;
+  String number = '';
 
-  const MobileChatScreen({
+  MobileChatScreen({
     super.key,
     required this.name,
     required this.uid,
@@ -46,6 +48,7 @@ class MobileChatScreen extends ConsumerWidget {
               : StreamBuilder<UserModel>(
                   stream: ref.read(authControllerProvider).userDataById(uid),
                   builder: (context, snapshot) {
+                    number = snapshot.data!.phoneNumber;
                     bool _isOnline = false;
                     if (snapshot.hasData) {
                       _isOnline = snapshot.data!.isOnline;
@@ -75,7 +78,9 @@ class MobileChatScreen extends ConsumerWidget {
               icon: const Icon(Icons.video_call),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                FlutterPhoneDirectCaller.callNumber(number);
+              },
               icon: const Icon(Icons.call),
             ),
             IconButton(
@@ -85,7 +90,7 @@ class MobileChatScreen extends ConsumerWidget {
           ],
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
             image: AssetImage("assets/backgroundImage.png"),
             fit: BoxFit.cover,
