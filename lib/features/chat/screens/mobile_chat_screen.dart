@@ -1,5 +1,6 @@
 import 'package:chit_chat/common/widgets/loader.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
+import 'package:chit_chat/features/call/screens/call_pickup_screen.dart';
 import 'package:chit_chat/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/colors.dart';
@@ -26,83 +27,83 @@ class MobileChatScreen extends ConsumerWidget {
 
   void makeCall(WidgetRef ref, BuildContext context) {
     ref.read(callControllerProvider).makeCall(
-      context,
-      name,
-      uid,
-      profilePic,
-      isGroupChat,
-    );
+          context,
+          name,
+          uid,
+          profilePic,
+          isGroupChat,
+        );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor,
-        title: isGroupChat
-          ? Text(name)
-          : StreamBuilder<UserModel>(
-            stream: ref.read(authControllerProvider).userDataById(uid),
-            builder: (context, snapshot) {
-              bool _isOnline = false;
-              if (snapshot.hasData) {
-                _isOnline = snapshot.data!.isOnline;
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Loader();
-              }
+    return CallPickupScreen(
+      scaffold: Scaffold(
+        appBar: AppBar(
+          backgroundColor: appBarColor,
+          title: isGroupChat
+              ? Text(name)
+              : StreamBuilder<UserModel>(
+                  stream: ref.read(authControllerProvider).userDataById(uid),
+                  builder: (context, snapshot) {
+                    bool _isOnline = false;
+                    if (snapshot.hasData) {
+                      _isOnline = snapshot.data!.isOnline;
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Loader();
+                    }
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name),
-                  Text(
-                    _isOnline ? '🟢 online' : '⚪ offline',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              );
-            }),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () => makeCall(ref, context),
-            icon: const Icon(Icons.video_call),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.call),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert),
-          ),
-        ],
-      ),
-
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(name),
+                        Text(
+                          _isOnline ? '🟢 online' : '⚪ offline',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+          centerTitle: false,
+          actions: [
+            IconButton(
+              onPressed: () => makeCall(ref, context),
+              icon: const Icon(Icons.video_call),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.call),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert),
+            ),
+          ],
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
             image: AssetImage("assets/backgroundImage.png"),
             fit: BoxFit.cover,
-          )
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: ChatList(
+          )),
+          child: Column(
+            children: [
+              Expanded(
+                child: ChatList(
+                  receiverUserId: uid,
+                  isGroupChat: isGroupChat,
+                ),
+              ),
+              BottomChatField(
                 receiverUserId: uid,
                 isGroupChat: isGroupChat,
               ),
-            ),
-            BottomChatField(
-              receiverUserId: uid,
-              isGroupChat: isGroupChat,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

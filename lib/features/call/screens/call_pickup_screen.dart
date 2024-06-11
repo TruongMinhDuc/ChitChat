@@ -7,6 +7,7 @@ import 'package:chit_chat/models/call.dart';
 
 class CallPickupScreen extends ConsumerWidget {
   final Widget scaffold;
+
   const CallPickupScreen({
     super.key,
     required this.scaffold,
@@ -19,7 +20,7 @@ class CallPickupScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.data() != null) {
           Call call =
-          Call.fromMap(snapshot.data!.data() as Map<String, dynamic>);
+              Call.fromMap(snapshot.data!.data() as Map<String, dynamic>);
 
           if (!call.hasDialled) {
             return Scaffold(

@@ -10,6 +10,7 @@ class CallScreen extends ConsumerStatefulWidget {
   final String channelId;
   final Call call;
   final bool isGroupChat;
+
   const CallScreen({
     super.key,
     required this.channelId,
@@ -23,7 +24,7 @@ class CallScreen extends ConsumerStatefulWidget {
 
 class _CallScreenState extends ConsumerState<CallScreen> {
   AgoraClient? client;
-  String baseUrl = 'https://whatsapp-clone-rrr.herokuapp.com';
+  String baseUrl = 'https://chitchatserver-hfcj.onrender.com';
 
   @override
   void initState() {
@@ -48,27 +49,30 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       body: client == null
           ? const Loader()
           : SafeArea(
-        child: Stack(
-          children: [
-            AgoraVideoViewer(client: client!),
-            AgoraVideoButtons(
-              client: client!,
-              disconnectButtonChild: IconButton(
-                onPressed: () async {
-                  await client!.engine.leaveChannel();
-                  ref.read(callControllerProvider).endCall(
-                    widget.call.callerId,
-                    widget.call.receiverId,
-                    context,
-                  );
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.call_end),
+              child: Stack(
+                children: [
+                  AgoraVideoViewer(client: client!),
+                  AgoraVideoButtons(
+                    client: client!,
+                    disconnectButtonChild: IconButton(
+                      onPressed: () async {
+                        await client!.engine.leaveChannel();
+                        ref.read(callControllerProvider).endCall(
+                              widget.call.callerId,
+                              widget.call.receiverId,
+                              context,
+                            );
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.call_end,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

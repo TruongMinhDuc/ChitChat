@@ -7,6 +7,7 @@ class Call {
   final String receiverPic;
   final String callId;
   final bool hasDialled;
+
   Call({
     required this.callerId,
     required this.callerName,

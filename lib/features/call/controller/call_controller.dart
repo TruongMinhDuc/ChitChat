@@ -20,6 +20,7 @@ class CallController {
   final CallRepository callRepository;
   final ProviderRef ref;
   final FirebaseAuth auth;
+
   CallController({
     required this.callRepository,
     required this.ref,
@@ -43,7 +44,7 @@ class CallController {
         hasDialled: true,
       );
 
-      Call recieverCallData = Call(
+      Call receiverCallData = Call(
         callerId: auth.currentUser!.uid,
         callerName: value.name,
         callerPic: value.profilePic,
@@ -54,18 +55,18 @@ class CallController {
         hasDialled: false,
       );
       if (isGroupChat) {
-        callRepository.makeGroupCall(senderCallData, context, recieverCallData);
+        callRepository.makeGroupCall(senderCallData, context, receiverCallData);
       } else {
-        callRepository.makeCall(senderCallData, context, recieverCallData);
+        callRepository.makeCall(senderCallData, context, receiverCallData);
       }
     });
   }
 
   void endCall(
-      String callerId,
-      String receiverId,
-      BuildContext context,
-      ) {
+    String callerId,
+    String receiverId,
+    BuildContext context,
+  ) {
     callRepository.endCall(callerId, receiverId, context);
   }
 }
