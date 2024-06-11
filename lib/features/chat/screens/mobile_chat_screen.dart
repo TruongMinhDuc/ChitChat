@@ -6,6 +6,7 @@ import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/features/chat/widgets/chat_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../call/controller/call_controller.dart';
 import '../widgets/bottom_chat_field.dart';
 
 class MobileChatScreen extends ConsumerWidget {
@@ -13,13 +14,25 @@ class MobileChatScreen extends ConsumerWidget {
   final String name;
   final String uid;
   final bool isGroupChat;
+  final String profilePic;
 
   const MobileChatScreen({
     super.key,
     required this.name,
     required this.uid,
     required this.isGroupChat,
+    required this.profilePic,
   });
+
+  void makeCall(WidgetRef ref, BuildContext context) {
+    ref.read(callControllerProvider).makeCall(
+      context,
+      name,
+      uid,
+      profilePic,
+      isGroupChat,
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,7 +69,7 @@ class MobileChatScreen extends ConsumerWidget {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => makeCall(ref, context),
             icon: const Icon(Icons.video_call),
           ),
           IconButton(
