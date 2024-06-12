@@ -125,7 +125,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                 text: 'STATUS',
               ),
               Tab(
-                text: 'CALLS',
+                text: 'CONTACTS',
               ),
             ],
           ),
@@ -135,30 +135,30 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           children: const [
             ContactsList(),
             StatusContactsScreen(),
-            Text('Need call feature add'),
+            SelectContactsScreen(),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            if (tabBarController.index == 0) {
-              Navigator.pushNamed(context, SelectContactsScreen.routeName);
-            } else {
-              File? pickedImage = await pickImageFromGallery(context);
-              if (pickedImage != null) {
-                Navigator.pushNamed(
-                  context,
-                  ConfirmStatusScreen.routeName,
-                  arguments: pickedImage,
-                );
-              }
-            }
-          },
-          backgroundColor: tabColor,
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     if (tabBarController.index == 0) {
+        //       Navigator.pushNamed(context, SelectContactsScreen.routeName);
+        //     } else {
+        //       File? pickedImage = await pickImageFromGallery(context);
+        //       if (pickedImage != null) {
+        //         Navigator.pushNamed(
+        //           context,
+        //           ConfirmStatusScreen.routeName,
+        //           arguments: pickedImage,
+        //         );
+        //       }
+        //     }
+        //   },
+        //   backgroundColor: tabColor,
+        //   child: const Icon(
+        //     Icons.add,
+        //     color: Colors.white,
+        //   ),
+        // ),
       ),
     );
   }

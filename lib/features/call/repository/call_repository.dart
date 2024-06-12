@@ -8,7 +8,7 @@ import 'package:chit_chat/models/call.dart';
 import 'package:chit_chat/models/group.dart' as model;
 
 final callRepositoryProvider = Provider(
-      (ref) => CallRepository(
+  (ref) => CallRepository(
     firestore: FirebaseFirestore.instance,
     auth: FirebaseAuth.instance,
   ),
@@ -17,6 +17,7 @@ final callRepositoryProvider = Provider(
 class CallRepository {
   final FirebaseFirestore firestore;
   final FirebaseAuth auth;
+
   CallRepository({
     required this.firestore,
     required this.auth,
@@ -26,10 +27,10 @@ class CallRepository {
       firestore.collection('call').doc(auth.currentUser!.uid).snapshots();
 
   void makeCall(
-      Call senderCallData,
-      BuildContext context,
-      Call receiverCallData,
-      ) async {
+    Call senderCallData,
+    BuildContext context,
+    Call receiverCallData,
+  ) async {
     try {
       await firestore
           .collection('call')
@@ -56,10 +57,10 @@ class CallRepository {
   }
 
   void makeGroupCall(
-      Call senderCallData,
-      BuildContext context,
-      Call receiverCallData,
-      ) async {
+    Call senderCallData,
+    BuildContext context,
+    Call receiverCallData,
+  ) async {
     try {
       await firestore
           .collection('call')
@@ -95,10 +96,10 @@ class CallRepository {
   }
 
   void endCall(
-      String callerId,
-      String receiverId,
-      BuildContext context,
-      ) async {
+    String callerId,
+    String receiverId,
+    BuildContext context,
+  ) async {
     try {
       await firestore.collection('call').doc(callerId).delete();
       await firestore.collection('call').doc(receiverId).delete();
@@ -108,14 +109,14 @@ class CallRepository {
   }
 
   void endGroupCall(
-      String callerId,
-      String receiverId,
-      BuildContext context,
-      ) async {
+    String callerId,
+    String receiverId,
+    BuildContext context,
+  ) async {
     try {
       await firestore.collection('call').doc(callerId).delete();
       var groupSnapshot =
-      await firestore.collection('groups').doc(receiverId).get();
+          await firestore.collection('groups').doc(receiverId).get();
       model.Group group = model.Group.fromMap(groupSnapshot.data()!);
       for (var id in group.membersUid) {
         await firestore.collection('call').doc(id).delete();

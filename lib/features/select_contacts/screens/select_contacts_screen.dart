@@ -16,23 +16,23 @@ class SelectContactsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Select contact'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
-            ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Select contact'),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: const Icon(
+      //         Icons.search,
+      //       ),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: const Icon(
+      //         Icons.more_vert,
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: ref.watch(getContactsProvider).when(
         data: (contactList) => ListView.builder(
           itemCount: contactList.length,
