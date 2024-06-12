@@ -138,27 +138,26 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             SelectContactsScreen(),
           ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     if (tabBarController.index == 0) {
-        //       Navigator.pushNamed(context, SelectContactsScreen.routeName);
-        //     } else {
-        //       File? pickedImage = await pickImageFromGallery(context);
-        //       if (pickedImage != null) {
-        //         Navigator.pushNamed(
-        //           context,
-        //           ConfirmStatusScreen.routeName,
-        //           arguments: pickedImage,
-        //         );
-        //       }
-        //     }
-        //   },
-        //   backgroundColor: tabColor,
-        //   child: const Icon(
-        //     Icons.add,
-        //     color: Colors.white,
-        //   ),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            // if (tabBarController.index == 0) {
+            //   Navigator.pushNamed(context, SelectContactsScreen.routeName);
+            // } else {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
+          },
+          backgroundColor: tabColor,
+          child: const Icon(
+            Icons.add_a_photo,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
