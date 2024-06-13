@@ -11,9 +11,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import '../../../colors.dart';
 import '../../../common/providers/message_reply_provider.dart';
+import '../../../common/utils/colors.dart';
 import 'message_reply_preview.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
@@ -185,7 +184,9 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     return Column(
       children: [
         isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
-        const SizedBox(width: 100,),
+        const SizedBox(
+          width: 100,
+        ),
         Row(
           children: [
             Expanded(
@@ -223,14 +224,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                               color: Colors.grey,
                             ),
                           ),
-                          // gif
-                          // IconButton(
-                          //   onPressed: () {},
-                          //   icon: const Icon(
-                          //     Icons.gif,
-                          //     color: Colors.grey,
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),

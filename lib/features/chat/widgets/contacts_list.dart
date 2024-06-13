@@ -1,11 +1,11 @@
 import 'package:chit_chat/common/widgets/loader.dart';
 import 'package:chit_chat/features/chat/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../common/utils/colors.dart';
 import '../../../models/chat_contact.dart';
 import '../../../models/group.dart';
 
@@ -85,7 +85,6 @@ class ContactsList extends ConsumerWidget {
                     },
                   );
                 }),
-
             StreamBuilder<List<ChatContact>>(
                 stream: ref.watch(chatControllerProvider).chatContacts(),
                 builder: (context, snapshot) {
@@ -135,7 +134,8 @@ class ContactsList extends ConsumerWidget {
                                   radius: 30,
                                 ),
                                 trailing: Text(
-                                  DateFormat.Hm().format(chatContactData.timeSent),
+                                  DateFormat.Hm()
+                                      .format(chatContactData.timeSent),
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontSize: 13,

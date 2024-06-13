@@ -1,7 +1,8 @@
-import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/common/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:chit_chat/features/auth/screens/login_screen.dart';
+
+import '../../../common/utils/colors.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});

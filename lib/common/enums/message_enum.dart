@@ -17,8 +17,8 @@ extension ConvertMessage on String {
         return MessageEnum.image;
       case 'text':
         return MessageEnum.text;
-      case 'gif':
-        return MessageEnum.gif;
+      // case 'gif':
+      //   return MessageEnum.gif;
       case 'video':
         return MessageEnum.video;
       default:

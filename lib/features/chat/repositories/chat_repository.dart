@@ -306,7 +306,7 @@ class ChatRepository {
           contactMsg = '📼 Audio';
           break;
         default:
-          contactMsg = 'GIF';
+          contactMsg = 'Text';
       }
       _saveDataToContactsSubcollection(
         senderUserData,

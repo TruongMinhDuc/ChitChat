@@ -1,7 +1,9 @@
-import 'package:chit_chat/colors.dart';
+
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../common/utils/colors.dart';
 
 class OTPScreen extends ConsumerWidget {
   static const String routeName = '/otp-screen';

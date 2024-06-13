@@ -1,5 +1,6 @@
-import 'package:chit_chat/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;

@@ -8,9 +8,11 @@ import 'package:chit_chat/features/status/screens/confirm_status_screen.dart';
 import 'package:chit_chat/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chit_chat/features/status/screens/status_contacts_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:chit_chat/colors.dart';
+
 import 'package:chit_chat/features/chat/widgets/contacts_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../common/utils/colors.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({super.key});
@@ -58,8 +60,8 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
 
   void signOut() {
     ref.read(authControllerProvider).signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LandingScreen()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const LandingScreen()));
   }
 
   @override
@@ -102,8 +104,8 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   ),
                 ),
                 PopupMenuItem(
-                  child: const Text('Signout'),
                   onTap: signOut,
+                  child: const Text('Signout'),
                 )
               ],
             )
@@ -143,14 +145,14 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             // if (tabBarController.index == 0) {
             //   Navigator.pushNamed(context, SelectContactsScreen.routeName);
             // } else {
-              File? pickedImage = await pickImageFromGallery(context);
-              if (pickedImage != null) {
-                Navigator.pushNamed(
-                  context,
-                  ConfirmStatusScreen.routeName,
-                  arguments: pickedImage,
-                );
-              }
+            File? pickedImage = await pickImageFromGallery(context);
+            if (pickedImage != null) {
+              Navigator.pushNamed(
+                context,
+                ConfirmStatusScreen.routeName,
+                arguments: pickedImage,
+              );
+            }
           },
           backgroundColor: tabColor,
           child: const Icon(

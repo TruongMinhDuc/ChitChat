@@ -91,7 +91,6 @@ class StatusRepository {
             .update({
           'photoUrl': statusImageUrls,
         });
-        return;
       } else {
         statusImageUrls = [imageurl];
       }

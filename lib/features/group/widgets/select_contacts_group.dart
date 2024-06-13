@@ -26,7 +26,7 @@ class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
     }
     setState(() {});
     ref
-        .read(selectedGroupContacts.state)
+        .read(selectedGroupContacts.notifier)
         .update((state) => [...state, contact]);
   }
 

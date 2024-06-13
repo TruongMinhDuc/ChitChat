@@ -4,8 +4,7 @@ import 'package:chit_chat/features/status/screens/status_screen.dart';
 import 'package:chit_chat/models/status_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../colors.dart';
+import '../../../common/utils/colors.dart';
 
 class StatusContactsScreen extends ConsumerWidget {
   const StatusContactsScreen({super.key});

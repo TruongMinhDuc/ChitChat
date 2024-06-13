@@ -1,10 +1,12 @@
-import 'package:chit_chat/colors.dart';
+
 import 'package:chit_chat/common/utils/utils.dart';
 import 'package:chit_chat/common/widgets/custom_button.dart';
 import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../common/utils/colors.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';

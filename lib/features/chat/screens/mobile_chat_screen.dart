@@ -3,11 +3,12 @@ import 'package:chit_chat/features/auth/controller/auth_controller.dart';
 import 'package:chit_chat/features/call/screens/call_pickup_screen.dart';
 import 'package:chit_chat/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:chit_chat/colors.dart';
+
 import 'package:chit_chat/features/chat/widgets/chat_list.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/utils/colors.dart';
 import '../../call/controller/call_controller.dart';
 import '../widgets/bottom_chat_field.dart';
 
@@ -17,9 +18,8 @@ class MobileChatScreen extends ConsumerWidget {
   final String uid;
   final bool isGroupChat;
   final String profilePic;
-  String number = '';
 
-  MobileChatScreen({
+  const MobileChatScreen({
     super.key,
     required this.name,
     required this.uid,
@@ -39,6 +39,7 @@ class MobileChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var number = "";
     return CallPickupScreen(
       scaffold: Scaffold(
         appBar: AppBar(

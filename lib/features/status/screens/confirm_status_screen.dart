@@ -1,8 +1,9 @@
-import 'package:chit_chat/colors.dart';
 import 'package:chit_chat/features/status/controllers/status_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
+
+import '../../../common/utils/colors.dart';
 
 class ConfirmStatusScreen extends ConsumerWidget {
   static const String routeName = '/confirm-status-screen';

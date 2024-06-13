@@ -132,9 +132,6 @@ class AuthRepository {
   }
 
   void signOut() async {
-    String uid = auth.currentUser!.uid;
-    //var collection =  firestore.collection('users').doc(uid).delete();
-
-    auth.signOut();
+      auth.signOut();
   }
 }

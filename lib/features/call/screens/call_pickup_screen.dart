@@ -20,7 +20,7 @@ class CallPickupScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.data() != null) {
           Call call =
-          Call.fromMap(snapshot.data!.data() as Map<String, dynamic>);
+              Call.fromMap(snapshot.data!.data() as Map<String, dynamic>);
 
           if (!call.hasDialled) {
             return Scaffold(
@@ -58,15 +58,15 @@ class CallPickupScreen extends ConsumerWidget {
                         IconButton(
                           onPressed: () {
                             ref.read(callControllerProvider).endCall(
-                              call.callerId,
-                              call.receiverId,
-                              context,
-                            );
+                                  call.callerId,
+                                  call.receiverId,
+                                  context,
+                                );
                             ref.read(callControllerProvider).endGroupCall(
-                              call.callerId,
-                              call.receiverId,
-                              context,
-                            );
+                                  call.callerId,
+                                  call.receiverId,
+                                  context,
+                                );
                             Navigator.pop(context);
                           },
                           icon: const Icon(Icons.call_end,

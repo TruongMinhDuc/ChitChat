@@ -1,8 +1,8 @@
 import 'package:chit_chat/common/enums/message_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:chit_chat/colors.dart';
 import 'package:swipe_plus/swipe_plus.dart';
 
+import '../../../common/utils/colors.dart';
 import 'display_media_file.dart';
 
 class SenderMessageCard extends StatelessWidget {
@@ -32,82 +32,83 @@ class SenderMessageCard extends StatelessWidget {
     return SwipePlus(
       dragDirection: DragDirection.LTR,
       onDragComplete: onRightSwipe,
-      child:Align(
-      alignment: Alignment.centerLeft,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width - 45,
-        ),
-        child: Card(
-          elevation: 1,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: senderMessageColor,
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          child: Stack(
-            children: [
-              Padding(
-                padding: type == MessageEnum.text
-                    ? const EdgeInsets.only(
-                        left: 10,
-                        right: 30,
-                        top: 5,
-                        bottom: 20,
-                      )
-                    : const EdgeInsets.only(
-                  left: 5,
-                  top: 5,
-                  right: 5,
-                  bottom: 25,
-                ),
-                child: Column(
-                  children: [
-                    if (isReplying) ...[
-                      Text(
-                        username,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width - 45,
+          ),
+          child: Card(
+            elevation: 1,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            color: senderMessageColor,
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: type == MessageEnum.text
+                      ? const EdgeInsets.only(
+                          left: 10,
+                          right: 30,
+                          top: 5,
+                          bottom: 20,
+                        )
+                      : const EdgeInsets.only(
+                          left: 5,
+                          top: 5,
+                          right: 5,
+                          bottom: 25,
                         ),
-                      ),
-                      const SizedBox(height: 3),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: backgroundColor.withOpacity(0.5),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(
-                              5,
-                            ),
+                  child: Column(
+                    children: [
+                      if (isReplying) ...[
+                        Text(
+                          username,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        child: DisplayTextImageGIF(
-                          message: repliedText,
-                          type: repliedMessageType,
+                        const SizedBox(height: 3),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: backgroundColor.withOpacity(0.5),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                5,
+                              ),
+                            ),
+                          ),
+                          child: DisplayTextImageGIF(
+                            message: repliedText,
+                            type: repliedMessageType,
+                          ),
                         ),
+                        const SizedBox(height: 8),
+                      ],
+                      DisplayTextImageGIF(
+                        message: message,
+                        type: type,
                       ),
-                      const SizedBox(height: 8),
                     ],
-                    DisplayTextImageGIF(
-                      message: message,
-                      type: type,
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: 2,
-                right: 10,
-                child: Text(
-                  date,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey[600],
                   ),
                 ),
-              ),
-            ],
+                Positioned(
+                  bottom: 2,
+                  right: 10,
+                  child: Text(
+                    date,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'package:chit_chat/screens/mobile_layout_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'colors.dart';
+import 'common/utils/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +21,7 @@ void main() async {
     ),
   );
 }
+
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
@@ -37,19 +38,19 @@ class MyApp extends ConsumerWidget {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: ref.watch(userDataAuthProvider).when(
-        data: (user) {
-          if (user == null) {
-            return const LandingScreen();
-          }
-          return const MobileLayoutScreen();
-        },
-        error: (err, trace) {
-          return ErrorScreen(
-            error: err.toString(),
-          );
-        },
-        loading: () => const Loader(),
-      ),
+            data: (user) {
+              if (user == null) {
+                return const LandingScreen();
+              }
+              return const MobileLayoutScreen();
+            },
+            error: (err, trace) {
+              return ErrorScreen(
+                error: err.toString(),
+              );
+            },
+            loading: () => const Loader(),
+          ),
     );
   }
 }

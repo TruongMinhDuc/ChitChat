@@ -5,7 +5,7 @@ import 'package:story_view/story_view.dart';
 import '../../../models/status_model.dart';
 
 class StatusScreen extends StatefulWidget {
-  static const String routeName ='/status-screen';
+  static const String routeName = '/status-screen';
   final Status status;
 
   const StatusScreen({super.key, required this.status});
@@ -42,8 +42,8 @@ class _StatusScreenState extends State<StatusScreen> {
           : StoryView(
               storyItems: storyItems,
               controller: controller,
-              onVerticalSwipeComplete: (direction){
-                if(direction == Direction.down) {
+              onVerticalSwipeComplete: (direction) {
+                if (direction == Direction.down) {
                   Navigator.pop(context);
                 }
               },

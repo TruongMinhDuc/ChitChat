@@ -47,10 +47,9 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
             child: Center(
               child: IconButton(
                 onPressed: () {
-                  if(isPlay) {
+                  if (isPlay) {
                     videoPlayerController.pause();
-                  }
-                  else {
+                  } else {
                     videoPlayerController.play();
                     videoPlayerController.setLooping(!isPlay);
                   }
@@ -60,7 +59,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                   });
                 },
                 icon: const Icon(
-                    Icons.play_arrow,
+                  Icons.play_arrow,
                   size: 40,
                 ),
               ),
